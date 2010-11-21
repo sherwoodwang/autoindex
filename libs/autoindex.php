@@ -123,7 +123,7 @@
 		protected function generate($remote_path, $local_path, $parent) {
 			chdir($local_path);
 			
-			$local_path_escaped = preg_replace('/(\*|\?|\[)/', '[$1]', $local_path);
+			$local_path_escaped = preg_replace('/[*?\[\]{}]/', '\\\$0', $local_path);
 			$paths = glob($local_path_escaped . '/{,.}*', GLOB_BRACE);
 			$readme = null;
 			
