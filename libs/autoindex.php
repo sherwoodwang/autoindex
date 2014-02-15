@@ -131,20 +131,19 @@
 		protected function generate($remote_path, $local_path, $parent) {
 			chdir($local_path);
 			
-			$local_path_escaped = preg_replace('/[*?\[\]{}]/', '\\\$0', $local_path);
-			$paths = glob($local_path_escaped . '/{,.}*', GLOB_BRACE);
 			$readme = null;
+			$names = scandir($local_path);
 			
 			// List files:
-			foreach ($paths as $path) {
+			foreach ($names as $name) {
+				$path = $local_path . '/' . $name;
+
 				if (!$this->isAllowed($path)) continue;
 				
 				if (is_null($readme) and $this->isReadme($path)) {
 					$readme = $this->isReadme($path);
 					$readme->path = $path;
 				}
-				
-				$name = basename($path);
 				
 				$item = $this->document->createElement('item');
 				
