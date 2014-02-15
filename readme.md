@@ -39,10 +39,10 @@ Add the following lines in to config:
 		fastcgi_param SCRIPT_NAME /autoindex/index.php;
 		fastcgi_param SCRIPT_FILENAME
 			/PATH_TO_AUTOINDEX/autoindex/index.php;
-		fastcgi_param PATH_INFO $request_uri;
-		fastcgi_param PATH_TRANSLATED $document_root$request_uri;
+		fastcgi_param PATH_INFO $uri;
+		fastcgi_param PATH_TRANSLATED $document_root$uri;
 
-		if (-d $document_root$request_uri) {
+		if (-d $document_root$uri) {
 			fastcgi_pass unix:/var/run/php5-fpm.sock;
 		}
 	}
