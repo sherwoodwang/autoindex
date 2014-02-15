@@ -85,7 +85,11 @@
 			if (isset($_SERVER['PATH_TRANSLATED'])) {
 				$local_path = realpath($_SERVER['PATH_TRANSLATED']);
 			} else {
-				$remote_path = urldecode(preg_replace('/\?.*/', null, $_SERVER['REQUEST_URI']));
+				if (isset($_SERVER['PATH_INFO'])) {
+					$remote_path = $_SERVER['PATH_INFO'];
+				} else {
+					$remote_path = urldecode(preg_replace('/\?.*/', null, $_SERVER['REQUEST_URI']));
+				}
 				$local_path = realpath($_SERVER['DOCUMENT_ROOT'] . $remote_path);
 			}
 			
