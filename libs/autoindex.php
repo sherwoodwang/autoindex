@@ -83,7 +83,7 @@
 		
 		public function execute() {
 			if (isset($_SERVER['PATH_INFO'])) {
-				$remote_path = $_SERVER['PATH_INFO'];
+				$remote_path = urldecode($_SERVER['PATH_INFO']);
 			} else {
 				$remote_path = urldecode(preg_replace('/\?.*/', null, $_SERVER['REQUEST_URI']));
 			}
